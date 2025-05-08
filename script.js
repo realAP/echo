@@ -7,12 +7,12 @@ class Echo {
         this.sections.push(provider);
     }
 
-    render() {
+    async render() {
         const container = document.getElementById('app');
         container.innerHTML = '';
 
-        this.sections.forEach(provider => {
-            const section = provider();
+        for (const provider of this.sections) {
+            const section = await provider();
             const secEl = document.createElement('section');
 
             const title = document.createElement('h2');
@@ -24,7 +24,7 @@ class Echo {
             secEl.appendChild(title);
             secEl.appendChild(content);
             container.appendChild(secEl);
-        });
+        }
     }
 }
 
@@ -49,6 +49,10 @@ echo.addSection(() => ({
 echo.addSection(async () => {
     const result = await fetch('/client-ip', {cache: 'no-store'})
     const body = await result.json()
+    console.log({
+        title: 'IP Address',
+        content: body.ip
+    })
     return {
         title: 'IP Address',
         content: body.ip
