@@ -116,3 +116,17 @@ fetch('/client-ip', { cache: 'no-store' })
         echo.addSection(() => ({ title: 'Public IP', content: 'Unavailable' }));
     })
     .finally(() => echo.render());
+
+function getWebGLInfo() {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) return { vendor: 'Unavailable', renderer: 'Unavailable' };
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    return {
+        vendor: debugInfo ? gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) : 'Unavailable',
+        renderer: debugInfo ? gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) : 'Unavailable'
+    };
+}
+const { vendor, renderer } = getWebGLInfo();
+echo.addSection(() => ({ title: 'WebGL Vendor', content: vendor }));
+echo.addSection(() => ({ title: 'WebGL Renderer', content: renderer }));
