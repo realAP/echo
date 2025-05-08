@@ -15,7 +15,7 @@ html, body {
 }
 
 body {
-    max-width: 820px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
     line-height: 1.6;
@@ -44,14 +44,21 @@ h1 {
     color: #666;
 }
 
-/* ---- Info Sections ---- */
+/* ---- Grid Layout for Info ---- */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* ---- Info Cards ---- */
 section {
     background: var(--card-bg);
-    box-shadow: 0 8px 16px var(--card-shadow);
+    box-shadow: 0 4px 12px var(--card-shadow);
     border-radius: 10px;
     padding: 1rem 1.25rem;
-    margin-bottom: 1.5rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 section:hover {
@@ -60,7 +67,7 @@ section:hover {
 
 section h2 {
     margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--accent);
     border-bottom: 2px solid var(--accent);
     display: inline-block;
@@ -76,6 +83,7 @@ pre {
     white-space: pre-wrap;
     word-break: break-word;
     font-family: "Courier New", Courier, monospace;
+    color: #2d3436;
 }
 
 /* ---- Footer ---- */
